@@ -32,3 +32,21 @@ CREATE TABLE Measurements (
     CONSTRAINT FK_Node_Measurements FOREIGN KEY (NodeID) 
     REFERENCES Nodes(NodeID) ON DELETE CASCADE
 );
+```
+# ⚙️ Setup & Installation
+
+1. Database Setup
+* Open SQL Server Management Studio (SSMS).
+* Create a new database named Measurements.
+* Execute the SQL script provided above to create the tables.
+
+2. Configuration
+Update the appsettings.json file in the WebApplication1 project with your local connection string:
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=YOUR_SERVER_NAME;Database=Measurements;Trusted_Connection=True;TrustServerCertificate=True;"
+  }
+}
+```
