@@ -8,3 +8,27 @@
 
 * Backend (WebApplication1): An ASP.NET Core Web API built with .NET 9. It handles data ingestion, storage logic using Dapper ORM, and exposes RESTful endpoints.
 * Frontend (Interfata): A Windows Forms application that consumes the API to display real-time metrics and sensor types for each registered node.
+
+# 🛠️ Tech Stack
+
+* Framework: .NET 10 (C#)
+* Data Access: Dapper ORM
+* Database: Microsoft SQL Server
+
+# 🗄️ Database Schema
+
+```sql
+CREATE TABLE Nodes (
+    NodeID INT IDENTITY(1,1) PRIMARY KEY,
+    NodeName NVARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE TABLE Measurements (
+    MeasureID BIGINT IDENTITY(1,1) PRIMARY KEY,
+    NodeID INT NOT NULL,
+    SensorType NVARCHAR(50) NOT NULL,
+    SensorValue FLOAT NOT NULL,
+    RecordedAt DATETIME DEFAULT GETDATE(),
+    CONSTRAINT FK_Node_Measurements FOREIGN KEY (NodeID) 
+    REFERENCES Nodes(NodeID) ON DELETE CASCADE
+);
