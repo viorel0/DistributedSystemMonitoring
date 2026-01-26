@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+  </Folder>
+  <Project Path="Interfata/Interfata.csproj" Id="05a291c6-5d97-4666-a0c3-7237c91889b5" />
+  <Project Path="WebApplication1/WebApplication1.csproj" />
+</Solution>
