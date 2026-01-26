@@ -50,3 +50,8 @@ Update the appsettings.json file in the WebApplication1 project with your local 
   }
 }
 ```
+
+3. Execution
+* Open the .slnx (or .sln) file in Visual Studio.
+* Set both WebApplication1 and Interfata as Startup Projects.
+* Press F5 to run the full system.
