@@ -17,6 +17,8 @@
 
 # 🗄️ Database Schema
 
+Schema is designed for Microsoft SQL Server (T-SQL)
+
 ```sql
 CREATE TABLE Nodes (
     NodeID INT IDENTITY(1,1) PRIMARY KEY,
