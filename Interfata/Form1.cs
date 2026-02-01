@@ -6,6 +6,7 @@ namespace Interfata
     public partial class Form1 : Form
     {
         private Dictionary<string, Chart> _chartCache = new Dictionary<string, Chart>();
+        private Dictionary<string, DateTime> _lastProcessedTimestamp = new Dictionary<string, DateTime>();
         private System.Windows.Forms.Timer _updateTimer;
         public Form1()
         {
@@ -63,6 +64,12 @@ namespace Interfata
             series.Color = Color.DodgerBlue;
             series.BorderWidth = 2;
 
+            series.IsValueShownAsLabel = true;  
+            series.MarkerStyle = MarkerStyle.Circle;
+            series.MarkerSize = 6;          
+            series.MarkerColor = Color.DeepPink;  
+            series.LabelFormat = "0.##";  
+            series.Font = new Font("Segoe UI", 8, FontStyle.Bold); 
 
             series.IsXValueIndexed = true;
 
@@ -77,15 +84,14 @@ namespace Interfata
             return chart;
 
         }
+        
         private async void UpdateActiveChart_Tick(object sender, EventArgs e)
         {
             if (_chartCache.Count == 0) return;
 
             var keys = _chartCache.Keys.ToList();
-
             foreach (var key in keys)
             {
-                // Spargem cheia ca să știm ce să cerem de la API
                 string[] parts = key.Split('|');
                 string node = parts[0];
                 string sensor = parts[1];
@@ -93,20 +99,25 @@ namespace Interfata
                 try
                 {
                     var data = await ApiRequests.GetNodeTypeValueLatest(node, sensor);
+
                     if (data != null)
                     {
-                        Chart currentChart = _chartCache[key];
-                        var serie = currentChart.Series["DateSenzor"];
-
-                        string labelTimp = data.RecordedAt.ToString("HH:mm:ss");
-
-                        serie.Points.AddXY(labelTimp, data.SensorValue);
-
-                        if (serie.Points.Count > 12) serie.Points.RemoveAt(0);
-
-                        if (currentChart.Visible)
+                        if (!_lastProcessedTimestamp.ContainsKey(key) || data.RecordedAt > _lastProcessedTimestamp[key])
                         {
-                            currentChart.ChartAreas[0].RecalculateAxesScale();
+                            _lastProcessedTimestamp[key] = data.RecordedAt;
+
+                            Chart currentChart = _chartCache[key];
+                            var serie = currentChart.Series["DateSenzor"];
+                            string labelTimp = data.RecordedAt.ToString("HH:mm:ss");
+
+                            serie.Points.AddXY(labelTimp, data.SensorValue);
+
+                            if (serie.Points.Count > 12) serie.Points.RemoveAt(0);
+
+                            if (currentChart.Visible)
+                            {
+                                currentChart.ChartAreas[0].RecalculateAxesScale();
+                            }
                         }
                     }
                 }

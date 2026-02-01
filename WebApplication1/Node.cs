@@ -3,7 +3,6 @@
     public class Node
     {
         public string NodeName { get; set; } = string.Empty;
-
         public List<SensorReading> Sensors { get; set; } = new List<SensorReading>();
 
     }
