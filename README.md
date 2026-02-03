@@ -2,6 +2,8 @@
 
 ## Full-stack solution designed to collect and visualize real-time sensor data from multiple distributed nodes. This project demonstrates a robust integration between an Asynchronous Web API and a WinForms Desktop Interface.
 
+<img width="1147" height="661" alt="winform" src="https://github.com/user-attachments/assets/371fcbb5-eca6-42a0-92a6-e83fffc8dc88" />
+
 # 🏗️ Project Architecture
 
 ### The solution is divided into two main components:
