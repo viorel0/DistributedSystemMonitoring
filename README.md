@@ -8,7 +8,7 @@
 
 ### The solution is divided into two main components:
 
-* Backend (WebApplication1): An ASP.NET Core Web API built with .NET 9. It handles data ingestion, storage logic using Dapper ORM, and exposes RESTful endpoints.
+* Backend (WebApplication1): An ASP.NET Core Web API built with .NET 10. It handles data ingestion, storage logic using Dapper ORM, and exposes RESTful endpoints.
 * Frontend (Interfata): A Windows Forms application that consumes the API to display real-time metrics and sensor types for each registered node.
 
 # 🛠️ Tech Stack
